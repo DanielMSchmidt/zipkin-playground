@@ -26,7 +26,7 @@ To have nicer graphs this service gets a set of endpoints to call with an array 
 ```json
 [{
     "endpoint": "http://foo.bar.com/nice",
-    "body": "{\"result\": \"id-42\"}"
+    "body": "{\"result\": \"id-42\"}",
     "delay": 800
 }]
 ```
