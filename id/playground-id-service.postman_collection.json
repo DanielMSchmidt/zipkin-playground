@@ -51,7 +51,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "82a6dd5a-417d-4956-a1ae-60b77a710f7b",
+						"id": "1db9c363-9f27-44f1-a2ef-74fc5c988e80",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"response is ok\", () => {",
@@ -65,7 +65,7 @@
 							"",
 							"pm.test(\"Response time can be controlled\", () => {",
 							"    pm.expect(pm.response.responseTime).to.be.above(800)",
-							"    pm.expect(pm.response.responseTime).to.be.below(850)",
+							"    pm.expect(pm.response.responseTime).to.be.below(900)",
 							"})"
 						]
 					}
