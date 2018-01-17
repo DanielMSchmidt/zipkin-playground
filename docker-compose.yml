@@ -1,0 +1,32 @@
+version: "3"
+services:
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+
+  # ID-Services
+  id_alfred:
+    build: ./id
+    ports:
+      - "3001:3000"
+    environment:
+      ZIPKIN_HOST_PORT: "http://zipkin:9411"
+      SERVICE: "id-alfred"
+
+  id_batman:
+    build: ./id
+    ports:
+      - "3002:3000"
+    environment:
+      ZIPKIN_HOST_PORT: "http://zipkin:9411"
+      SERVICE: "id-batman"
+  
+  id_catwoman:
+    build: ./id
+    ports:
+      - "3003:3000"
+    environment:
+      ZIPKIN_HOST_PORT: "http://zipkin:9411"
+      SERVICE: "id-catwoman"
