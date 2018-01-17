@@ -1,4 +1,4 @@
-# Zipkin Opentracing Playground
+# Zipkin Opentracing Playground [![Build Status](https://travis-ci.org/DanielMSchmidt/zipkin-playground.svg?branch=master)](https://travis-ci.org/DanielMSchmidt/zipkin-playground)
 
 This is a repo full of examples with zipkin opentracing compatible APIs that I want
 to use for a talk of mine about client side tracing.
