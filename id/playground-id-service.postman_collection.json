@@ -1,0 +1,106 @@
+{
+	"info": {
+		"name": "playground/id-service",
+		"_postman_id": "a56338aa-c49c-cf65-5a48-855d288e30fb",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b217346b-b35e-4bdd-967f-775949f481a0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", () => {",
+							"    pm.response.to.be.ok // enforce 200ish",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 500ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"health"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST http://localhost:3000/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82a6dd5a-417d-4956-a1ae-60b77a710f7b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", () => {",
+							"    pm.response.to.be.ok // enforce 200ish",
+							"})",
+							"",
+							"pm.test(\"returns what is put in\", () => {",
+							"    const jsonData = pm.response.json()",
+							"    pm.expect(jsonData.myContent).to.eql('isPresent')",
+							"})",
+							"",
+							"pm.test(\"Response time can be controlled\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.above(800)",
+							"    pm.expect(pm.response.responseTime).to.be.below(850)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"myContent\": \"isPresent\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000?timeout=800",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"query": [
+						{
+							"key": "timeout",
+							"value": "800",
+							"equals": true
+						}
+					]
+				},
+				"description": "Returns the same as put in"
+			},
+			"response": []
+		}
+	]
+}
