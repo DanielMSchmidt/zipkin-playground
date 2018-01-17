@@ -4,6 +4,16 @@ This is a repo full of examples with zipkin opentracing compatible APIs that I w
 to use for a talk of mine about client side tracing.
 
 
+## Start
+
+If you just want a bunch of services you can interact and play with, try running `docker-compose up`, this will spawn you these services:
+
+- **Zipkin**: 9411
+- **ID-Service**:
+    - *alfred-id*: 3001
+    - *batman-id*: 3002
+    - *catwoman-id*: 3003
+
 ## ID-Service
 
 The idea is to have a service that just returns what is posted to it after a timespan,

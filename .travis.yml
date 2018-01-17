@@ -4,8 +4,19 @@ node_js:
   - "8"
   - "6"
 
+sudo: required
+
+services:
+  - docker
+
 install:
   - "cd id"
   - "npm install"
 test:
   - "npm test"
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker build -t danielmschmidt/zipkin-playground-id .;
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+    docker push danielmschmidt/zipkin-playground-id;
+    fi
