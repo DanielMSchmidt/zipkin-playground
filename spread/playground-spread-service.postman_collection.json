@@ -1,0 +1,112 @@
+{
+	"info": {
+		"name": "playground/spread-service",
+		"_postman_id": "d3ad2f03-b809-9e2e-ee36-2914e346995b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5400615c-0205-493c-92b8-780d364bd4c8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", () => {",
+							"    pm.response.to.be.ok // enforce 200ish",
+							"})",
+							"",
+							"pm.test(\"returns what is put in\", () => {",
+							"    const jsonData = pm.response.json()",
+							"    pm.expect(jsonData).to.eql([{",
+							"        result: \"id-alfred\"",
+							"    },{",
+							"        result: \"id-batman\"",
+							"    },{",
+							"        result: \"id-catwoman\"",
+							"    }])",
+							"})",
+							"",
+							"pm.test(\"Response time can be controlled\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.above(1300)",
+							"    pm.expect(pm.response.responseTime).to.be.below(1400)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"endpoint\": \"http://localhost:3001?timeout=600\",\n    \"body\": \"{\\\"result\\\": \\\"id-alfred\\\"}\",\n    \"delay\": 0\n},{\n    \"endpoint\": \"http://localhost:3002?timeout=100\",\n    \"body\": \"{\\\"result\\\": \\\"id-batman\\\"}\",\n    \"delay\": 100\n},{\n    \"endpoint\": \"http://localhost:3003?timeout=350\",\n    \"body\": \"{\\\"result\\\": \\\"id-catwoman\\\"}\",\n    \"delay\": 650\n}]"
+				},
+				"url": {
+					"raw": "http://localhost:4000?timeout=300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"query": [
+						{
+							"key": "timeout",
+							"value": "300",
+							"equals": true
+						}
+					]
+				},
+				"description": "Returns the same as put in"
+			},
+			"response": []
+		},
+		{
+			"name": "/health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b217346b-b35e-4bdd-967f-775949f481a0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", () => {",
+							"    pm.response.to.be.ok // enforce 200ish",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 500ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:4000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"health"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

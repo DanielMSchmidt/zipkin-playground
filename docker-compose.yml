@@ -30,3 +30,19 @@ services:
     environment:
       ZIPKIN_HOST_PORT: "http://zipkin:9411"
       SERVICE: "id-catwoman"
+
+  spread_daenerys:
+    build: ./spread
+    ports:
+      - "4001:4000"
+    environment:
+      ZIPKIN_HOST_PORT: "http://zipkin:9411"
+      SERVICE: "spread-daenerys"
+  
+  spread_eddard_stark:
+    build: ./spread
+    ports:
+      - "4002:4000"
+    environment:
+      ZIPKIN_HOST_PORT: "http://zipkin:9411"
+      SERVICE: "spread-eddard-stark"

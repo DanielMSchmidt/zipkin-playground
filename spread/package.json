@@ -1,0 +1,27 @@
+{
+  "name": "id",
+  "version": "1.0.0",
+  "description": "returns the same",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "pretest": "npm start & echo $! > .pid",
+    "test": "newman run playground-spread-service.postman_collection.json",
+    "posttest": "kill -9 $(cat .pid) && rm .pid"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "node-fetch": "^1.7.3",
+    "zipkin": "^0.11.2",
+    "zipkin-context-cls": "^0.11.0",
+    "zipkin-instrumentation-express": "^0.11.2",
+    "zipkin-transport-http": "^0.11.2"
+  },
+  "devDependencies": {
+    "newman": "^3.9.2"
+  }
+}
