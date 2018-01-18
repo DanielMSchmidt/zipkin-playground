@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "POST http://localhost:3000/",
+			"name": "/",
 			"event": [
 				{
 					"listen": "test",
