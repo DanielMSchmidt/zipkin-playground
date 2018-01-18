@@ -35,6 +35,8 @@ app.get('/health', (req, res) => {
   res.end();
 });
 
+// TODO: FIX THAT THIS DOESNT SEND THE SPAN HEADERS
+// TODO: FIX TRAVIS BUILD
 app.post('/', (req, res) => {
   const timeout = parseInt(req.query.timeout, 10) || 0;
   const promises = req.body.map(endpointConfig => new Promise((resolve, reject) => {
