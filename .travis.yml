@@ -10,29 +10,12 @@ services:
   - docker
 
 install:
-  - "cd id"
-  - "npm install"
-  - "cd ../spread"
-  - "npm install"
-  - "cd .."
-
+  - "pushd id && npm install && popd"
 test:
-  - "cd id"
-  - "npm test"
-  - "cd ../spread"
-  - "npm test"
-
+  - "pushd id && npm test && popd"
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker build -t danielmschmidt/zipkin-playground-id .;
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-
-    cd id/;
-    docker build -t danielmschmidt/zipkin-playground-id .;  
     docker push danielmschmidt/zipkin-playground-id;
-    cd ..;
-
-    cd spread/;
-    docker build -t danielmschmidt/zipkin-playground-spread .;  
-    docker push danielmschmidt/zipkin-playground-spread;
-    cd ..;
     fi
