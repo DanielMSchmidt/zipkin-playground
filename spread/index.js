@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const fetch = require('node-fetch');
+const uninstrumentedFetch = require('node-fetch');
 const {
   Tracer,
   BatchRecorder,
@@ -12,6 +12,7 @@ const {
 const { HttpLogger } = require('zipkin-transport-http');
 const CLSContext = require('zipkin-context-cls');
 const zipkinMiddleware = require('zipkin-instrumentation-express').expressMiddleware;
+const wrapFetch = require('zipkin-instrumentation-fetch');
 
 const zipkinHostPort = process.env.ZIPKIN_HOST_PORT || 'http://localhost:9411';
 const serviceName = process.env.SERVICE || 'pleaseEnterServiceName';
@@ -28,6 +29,8 @@ const recorder = new BatchRecorder({
   })
 });
 const tracer = new Tracer({ ctxImpl: new CLSContext('zipkin'), recorder, localServiceName: serviceName });
+
+const fetch = wrapFetch(uninstrumentedFetch, { tracer, remoteServiceName: 'APIs' });
 app.use(zipkinMiddleware({ tracer }));
 
 app.get('/health', (req, res) => {
@@ -35,8 +38,7 @@ app.get('/health', (req, res) => {
   res.end();
 });
 
-// TODO: FIX THAT THIS DOESNT SEND THE SPAN HEADERS
-// TODO: FIX TRAVIS BUILD
+// TODO: Check if the spans are set correctly
 app.post('/', (req, res) => {
   const timeout = parseInt(req.query.timeout, 10) || 0;
   const promises = req.body.map(endpointConfig => new Promise((resolve, reject) => {
