@@ -21,7 +21,10 @@ script:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker build -t danielmschmidt/zipkin-playground-id .;
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+    
+    docker build -t danielmschmidt/zipkin-playground-id ./id/;
     docker push danielmschmidt/zipkin-playground-id;
+    docker build -t danielmschmidt/zipkin-playground-id ./spread/;
+    docker push danielmschmidt/zipkin-playground-spread;
     fi
