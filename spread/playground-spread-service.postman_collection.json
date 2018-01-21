@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "5400615c-0205-493c-92b8-780d364bd4c8",
+						"id": "5ec4f841-23e8-4be3-a017-266b467dd10a",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"response is ok\", () => {",
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[{\n    \"endpoint\": \"http://localhost:3001?timeout=600\",\n    \"body\": \"{\\\"result\\\": \\\"id-alfred\\\"}\",\n    \"delay\": 0\n},{\n    \"endpoint\": \"http://localhost:3002?timeout=100\",\n    \"body\": \"{\\\"result\\\": \\\"id-batman\\\"}\",\n    \"delay\": 100\n},{\n    \"endpoint\": \"http://localhost:3003?timeout=350\",\n    \"body\": \"{\\\"result\\\": \\\"id-catwoman\\\"}\",\n    \"delay\": 650\n}]"
+					"raw": "[{\n    \"endpoint\": \"http://localhost:3001?timeout=600\",\n    \"body\": \"{\\\"result\\\": \\\"id-alfred\\\"}\",\n    \"delay\": 0,\n    \"serviceName\": \"alfred\"\n},{\n    \"endpoint\": \"http://localhost:3002?timeout=100\",\n    \"body\": \"{\\\"result\\\": \\\"id-batman\\\"}\",\n    \"delay\": 100,\n    \"serviceName\": \"batman\"\n},{\n    \"endpoint\": \"http://localhost:3003?timeout=350\",\n    \"body\": \"{\\\"result\\\": \\\"id-catwoman\\\"}\",\n    \"delay\": 650,\n    \"serviceName\": \"catwoman\"\n}]"
 				},
 				"url": {
 					"raw": "http://localhost:4000?timeout=300",
@@ -94,12 +94,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:4000/health",
+					"raw": "http://localhost:4001/health",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"health"
 					]

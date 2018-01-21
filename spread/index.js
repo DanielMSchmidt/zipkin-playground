@@ -30,7 +30,6 @@ const recorder = new BatchRecorder({
 });
 const tracer = new Tracer({ ctxImpl: new CLSContext('zipkin'), recorder, localServiceName: serviceName });
 
-const fetch = wrapFetch(uninstrumentedFetch, { tracer, remoteServiceName: 'APIs' });
 app.use(zipkinMiddleware({ tracer }));
 
 app.get('/health', (req, res) => {
@@ -44,6 +43,7 @@ app.post('/', (req, res) => {
   const promises = req.body.map(endpointConfig => new Promise((resolve, reject) => {
     const delay = parseInt(endpointConfig.delay, 10) || 0;
     setTimeout(() => {
+      const fetch = wrapFetch(uninstrumentedFetch, { tracer, remoteServiceName: endpointConfig.serviceName });
       fetch(endpointConfig.endpoint, { 
         headers: {
           'Accept': 'application/json, text/plain, */*',
