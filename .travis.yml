@@ -10,9 +10,15 @@ services:
   - docker
 
 install:
-  - "pushd id && npm install && popd"
-test:
-  - "pushd id && npm test && popd"
+  - docker-compose up -d
+  - cd id/ && npm install && cd ..
+  - cd spread/ && npm install && cd ..
+
+script:
+  - cd id/ && npm test && cd ..
+  - cd spread/ && npm test && cd ..
+  - docker-compose stop
+
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker build -t danielmschmidt/zipkin-playground-id .;
