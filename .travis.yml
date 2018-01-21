@@ -25,6 +25,6 @@ after_success:
     
     docker build -t danielmschmidt/zipkin-playground-id ./id/;
     docker push danielmschmidt/zipkin-playground-id;
-    docker build -t danielmschmidt/zipkin-playground-id ./spread/;
+    docker build -t danielmschmidt/zipkin-playground-spread ./spread/;
     docker push danielmschmidt/zipkin-playground-spread;
     fi
