@@ -13,6 +13,9 @@ If you just want a bunch of services you can interact and play with, try running
     - *alfred-id*: 3001
     - *batman-id*: 3002
     - *catwoman-id*: 3003
+- **Spread-Service**
+    - *spread-daenerys*: 4001
+    - *spread-eddard-stark*: 4002
 
 ## ID-Service
 
@@ -28,7 +31,7 @@ how long the service should take.
 }
 ```
 
-## Spread-service
+## Spread-Service
 
 To have nicer graphs this service gets a set of endpoints to call with an array like this:
 
