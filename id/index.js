@@ -34,13 +34,13 @@ const tracer = new Tracer({
   recorder,
   localServiceName: serviceName
 });
-app.use(zipkinMiddleware({ tracer }));
 
 app.get("/health", (req, res) => {
   res.status(200);
   res.end();
 });
 
+app.use(zipkinMiddleware({ tracer }));
 app.post("/", (req, res) => {
   const timeout = parseInt(req.query.timeout, 10) || defaultTimeout;
 

@@ -39,13 +39,12 @@ const tracer = new Tracer({
   localServiceName: serviceName
 });
 
-app.use(zipkinMiddleware({ tracer }));
-
 app.get("/health", (req, res) => {
   res.status(200);
   res.end();
 });
 
+app.use(zipkinMiddleware({ tracer }));
 // TODO: Check if the spans are set correctly
 app.post("/", (req, res) => {
   const timeout = parseInt(req.query.timeout, 10) || defaultTimeout;
